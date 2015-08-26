@@ -11,17 +11,31 @@ and open the template in the editor.
 #Container
 {
     margin: auto;
-    width: 500px;
+    width: 350px;
     height: 300px;
-    border: solid 1px;
+   
 }
 form
 {
     
     margin: auto;
+      border-radius: 5px 20px 5px 20px;
+    background: #EEA659;
+    padding: 20px; 
+     box-shadow: 15px 15px 8px #aaa; 
+  
 }
 .item
 {
     float: right;
     width: 160px;
+}
+.divItem
+{
+    width: 300px;
+    height: 37px;
+}
+.bouttons
+{
+  width: 150px;
 }
