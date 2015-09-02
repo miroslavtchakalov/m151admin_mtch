@@ -1,5 +1,5 @@
 <?php
- this.require 'Connexion.php';
+ require('Connexion.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
                 <div class="divItem">Description :<textarea class="item"></textarea></div>
                 <div class="divItem">Email :<input type="email" name="Email" class="item"></div>
                 <div class="divItem">Pseudo : <input type="text" name="Nickname" class="item"></div>
-                <div class="divItem">Mot de pass : <input type="password" name="Password" class="item"></div>
+                <div class="divItem">Mot de passe : <input type="password" name="Password" class="item"></div>
                 <input type="submit" name="Validate" value="Valider" class="bouttons">  
                 <input type="button" name="Delete" value="Effacer" class="bouttons">         
                 
