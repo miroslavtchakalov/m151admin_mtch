@@ -1,16 +1,32 @@
 <?php
 
-function connextion($username,$pass,$dbname)
+define("HOST","127.0.0.1");
+define("DBNAME","m151ex1");
+define("USER","Miroslav");
+define("PASS","127.0.0.1");
+
+function connexion()
 {
-    $pdo = new PDO('mysql:host=localhost;dbname='.$dbname,$username ,$pass);
+    
+   
     try {
-    $dbh = new PDO('mysql:host=localhost;dbname=test', $user, $pass);
-    foreach($dbh->query('SELECT * from FOO') as $row) {
-        print_r($row);
-    }
-    $dbh = null;
+    $dbh = new PDO('mysql:host='.HOST.';dbname='.DBNAME, USER, PASS);
+    
 } catch (PDOException $e) {
     print "Erreur !: " . $e->getMessage() . "<br/>";
-    die();
+
 }
+}
+
+function Insertion()
+{
+    $req = $db->prepare('INSERT INTO users(prenom,nom,dateNaissance,description,email,pseudo,motPass) VALUES(:FirstName, :LastName, :BirthDate, :Description, :Email,:Nickname, :Password)');
+    $req->bindParam(':FirstName', $_POST['FirstName'], PDO::PARAM_STR);
+    $req->bindParam(':LastName', $_POST['LastName'], PDO::PARAM_STR);
+    $req->bindParam(':BirthDate', $_POST['BirthDate'], PDO::PARAM_STR);
+    $req->bindParam(':Description', $_POST['Description'], PDO::PARAM_STR);
+    $req->bindParam(':Email', $_POST['Email'], PDO::PARAM_STR);
+    $req->bindParam(':Nickname', $_POST['Nickname'], PDO::PARAM_STR);
+    $req->bindParam(':Password', $_POST['Password'], PDO::PARAM_STR);
+    $retour = $req->execute();
 }
