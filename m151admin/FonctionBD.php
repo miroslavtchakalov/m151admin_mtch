@@ -31,4 +31,16 @@ function Insertion() {
     $retour = $req->execute();
 }
 
-?>
+function SelectUsers() {
+    $db = GetConnexion();
+    $req = $db->prepare("SELECT * from users");
+    $req->execute();
+    $requestResponse = $req->fetchAll(PDO::PARAM_STR);
+    return $requestResponse;
+}
+
+function AssocToHtml($listUsers) {
+    foreach ($listUsers as $val) {
+        echo '<option value="' . $val['idUtilisateur'] . '">' . $val['nomEquipe'] . '</option>';
+    }
+}
