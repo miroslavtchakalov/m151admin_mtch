@@ -1,28 +1,25 @@
 <?php
 
-define("HOST","127.0.0.1");
-define("DBNAME","m151ex1");
-define("USER","Miroslav");
-define("PASS","127.0.0.1");
+define("HOST", "127.0.0.1");
+define("DBNAME", "m151ex1");
+define("USER", "miroslav");
+define("PASS", "Super");
 
-function connexion()
-{
+function GetConnexion() {
     static $dbh = NULL;
+    if ($dbh === NULL) {
+        try {
+            $dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PASS);
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage() . "<br/>";
+        }
+    }
 
-
-
-
-    try {
-    $dbh = new PDO('mysql:host='.HOST.';dbname='.DBNAME, USER, PASS);
-    
-} catch (PDOException $e) {
-    print "Erreur !: " . $e->getMessage() . "<br/>";
-
-}
+    return $dbh;
 }
 
-function Insertion()
-{
+function Insertion() {
+    $db = GetConnexion();
     $req = $db->prepare('INSERT INTO users(prenom,nom,dateNaissance,description,email,pseudo,motPass) VALUES(:FirstName, :LastName, :BirthDate, :Description, :Email,:Nickname, :Password)');
     $req->bindParam(':FirstName', $_POST['FirstName'], PDO::PARAM_STR);
     $req->bindParam(':LastName', $_POST['LastName'], PDO::PARAM_STR);
@@ -33,4 +30,5 @@ function Insertion()
     $req->bindParam(':Password', $_POST['Password'], PDO::PARAM_STR);
     $retour = $req->execute();
 }
+
 ?>

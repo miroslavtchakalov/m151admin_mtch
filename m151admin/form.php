@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
- include './Connexion.php';
- if (!empty($_Post)) 
+ include './FonctionBD.php';
+ if (isset($_REQUEST["Validate"])) 
     {
      Insertion();
     }
