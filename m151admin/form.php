@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
- 
+ include './Connexion.php';
  if (!empty($_Post)) 
     {
      Insertion();
