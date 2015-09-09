@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php
- include('./Connexion.php');
+ 
+ if (!empty($_Post)) 
+    {
+     Insertion();
+    }
+    
 ?>
 <html>
     <head>
@@ -11,7 +16,7 @@
     </head>
     <body>
         <div id="Container">
-            <form action=Connexion.php method="POST">
+            <form action=form.php method="POST">
                 
                 <label class="divItem" for="FN">Prenom : </label><input type="text" placeholder="Prenom" name="FirstName" class="item" id="FN"></br>
                 <label class="divItem" for="LN">Nom : </label><input type="text" placeholder="Nom de Famille" name="LastName" class="item" id="LN"></br>

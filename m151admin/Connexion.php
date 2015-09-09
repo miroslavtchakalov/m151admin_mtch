@@ -7,8 +7,11 @@ define("PASS","127.0.0.1");
 
 function connexion()
 {
-    
-   
+    static $dbh = NULL;
+
+
+
+
     try {
     $dbh = new PDO('mysql:host='.HOST.';dbname='.DBNAME, USER, PASS);
     
@@ -30,3 +33,4 @@ function Insertion()
     $req->bindParam(':Password', $_POST['Password'], PDO::PARAM_STR);
     $retour = $req->execute();
 }
+?>
