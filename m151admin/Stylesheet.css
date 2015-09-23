@@ -20,22 +20,17 @@ and open the template in the editor.
 }
 form
 {
-   
-      
-    
     padding: 20px; 
-     
-  
 }
 .item
 {
     float: right;
-    width: 50%;
-   
+    width: 150px;
+   display: block;
 }
 .divItem
 {
-    width: 50%;
+    width: 150px;
     display: block;
   
 }
