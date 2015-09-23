@@ -41,7 +41,7 @@
 
         function AssocToHtml($listUsers) {
             foreach ($listUsers as $val) {
-                echo '<td>' . $val['prenom'] . '/' . $val['nom'] . '</p>';
+                echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php"> <= voir les details</a></td></tr>';
             }
         }
         ?>

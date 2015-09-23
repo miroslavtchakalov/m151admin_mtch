@@ -11,9 +11,11 @@ include './FonctionBD.php';
     </head>
     <body>
         <div id="Container">
+            <table>
             <?php
             AssocToHtml(SelectUsers());
             ?>
+            </table>
         </div>
     </body>
 </html>
