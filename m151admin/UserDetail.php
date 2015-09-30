@@ -12,10 +12,12 @@ include './FonctionBD.php';
     </head>
     <body>
         <div id="Container">
-            <table>
-            <?php
-            AssocToHtml(SelectUsers());
-            ?>
+            <table border="1">
+                <?php
+                $id = $_GET['id'];
+                DetailsToHtml(SelectUser($id));
+                echo '<tr><td><a href="Modification.php?id='.$id.'>modifier</a></td></tr>';
+                ?>
             </table>
         </div>
     </body>

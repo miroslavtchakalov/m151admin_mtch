@@ -11,6 +11,7 @@ function GetConnexion() {
     if ($dbh === NULL) {
         try {
             $dbh = new PDO('mysql:host=' . HOST . ';dbname=' . DBNAME, USER, PASS);
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             print "Erreur !: " . $e->getMessage() . "<br/>";
         }
@@ -34,25 +35,30 @@ function Insertion() {
 
 function SelectUsers() {
     $db = GetConnexion();
-    $req = $db->prepare("SELECT prenom,nom from users");
+    $req = $db->prepare("SELECT idUser,prenom,nom from users");
     $req->execute();
-    $requestResponse = $req->fetchAll(PDO::PARAM_STR);
+    $requestResponse = $req->fetchAll();
     return $requestResponse;
 }
-function SelectUser() {
+function SelectUser($id) {
+    echo $id;
     $db = GetConnexion();
-    $req = $db->prepare("SELECT prenom,nom from users");
+    $req = $db->prepare("SELECT * FROM users WHERE idUser='".$id."'");
     $req->execute();
-    $requestResponse = $req->fetchAll(PDO::PARAM_STR);
+    $requestResponse = $req->fetch();
     return $requestResponse;
 }
 
 function AssocToHtml($listUsers) {
     foreach ($listUsers as $val) {
-        echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php"> <= voir les details</a></td></tr>';
+        echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id='.$val['idUser'].'"> <= voir les details</a></td></tr>';
     }
 }
 function DetailsToHtml($UserInfo){
-   
-    }
+        echo '<tr><td>' . $UserInfo['prenom'] . ' </td><td> ' . $UserInfo['nom'] . '</td><td>' . $UserInfo['dateNaissance'] . '</td><td>' . $UserInfo['pseudo'] . '</td><td>' . $UserInfo['email'] . '</td><td>' . $UserInfo['description'] . '</td></td></tr>';
+    
+}
+function deleteUser($id)
+{
+    
 }
