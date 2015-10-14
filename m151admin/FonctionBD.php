@@ -60,5 +60,9 @@ function DetailsToHtml($UserInfo){
 }
 function deleteUser($id)
 {
-    
+    $id = $_REQUEST['idUser'];
+    $db = GetConnexion();
+    $req = $db->prepare("DELETE FROM users WHERE idUser = '$id'");
+    $req->execute();
+    header('Location: ./Users.php');
 }

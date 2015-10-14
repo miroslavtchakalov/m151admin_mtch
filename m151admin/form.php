@@ -26,8 +26,7 @@
                 <label class="divItem" for="email">Email :</label><input type="email" name="Email" class="item" id="email">
                 <label class="divItem" for="Pseudo">Pseudo : </label><input type="text" name="Nickname" class="item" id="Pseudo">
                 <label class="divItem" for="pass">Mot de passe : </label><input type="password" name="Password" class="item" id="pass">
-                <input type="submit" name="Validate" value="Valider" class="bouttons">  
-                <input type="button" name="Delete" value="Effacer" class="bouttons">         
+                <input type="submit" name="Validate" value="Valider" class="bouttons">        
                 <a href="Users.php"> Lister les utilisateurs</a>
             </form>
         </div>

@@ -1,6 +1,9 @@
 
 <?php
 include './FonctionBD.php';
+if (isset($_REQUEST['delete'])) {
+    deleteUser($id);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,14 +15,17 @@ include './FonctionBD.php';
     </head>
     <body>
         <div id="Container">
-            <table border="1">
-                <?php
-                $id = $_GET['id'];
-                DetailsToHtml(SelectUser($id));
-                echo '<tr><td><a href="Modification.php?id='.$id.'>modifier</a></td></tr>';
-                ?>
-            </table>
+            <form id="supprimer" action="UserDetail.php" method="get">
+                <table border="1">
+                    <?php
+                    $id = $_GET['id'];
+                    DetailsToHtml(SelectUser($id));
+                    echo '<input type="hidden" name="idUser" value="' . $id . '" />';
+                    echo '<tr><td><a href="Modification.php?id=' . $id . '">modifier</a></td></tr>';
+                    echo '<input type="submit" name="delete" value="Supprimer" class="bouttons">';
+                    ?>
+                </table>
+            </form>
         </div>
-    </body>
 </html>
 
