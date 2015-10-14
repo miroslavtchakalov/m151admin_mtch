@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
  include './FonctionBD.php';
- if (isset($_REQUEST["Validate"])) 
+ if (isset($_POST["Validate"])) 
     {
      Insertion();
     }
