@@ -3,7 +3,7 @@
  include './FonctionBD.php';
  if (isset($_POST["Validate"])) 
     {
-     Insertion();
+     Insertion($_POST['FirstName'],$_POST['LastName'],$_POST['BirthDate'],$_POST['description'],$_POST['Email'],$_POST['Nickname'],$_POST['Password']);
     }
  
     

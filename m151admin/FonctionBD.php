@@ -1,10 +1,26 @@
 
 <?php
 
+//Informations relatives à la BD
 define("HOST", "127.0.0.1");
 define("DBNAME", "m151ex1");
 define("USER", "miroslav");
 define("PASS", "Super");
+
+//Nom des tables !!A CHANGER!!
+define("TABLENAME", "users");
+
+//Noms des champs !!A CHANGER!!
+define("IDUSER", "idUser");
+define("FIRSTNAME", "prenom");
+define("LASTNAME", "nom");
+define("BIRTHDATE", "dateNaissance");
+define("DESCRIPTION", "description");
+define("EMAIL", "email");
+define("USERNAME", "pseudo");
+define("PASSWORD", "motPass");
+
+session_start();
 
 function GetConnexion() {
     static $dbh = NULL;
@@ -20,30 +36,31 @@ function GetConnexion() {
     return $dbh;
 }
 
-function Insertion() {
+function Insertion($fstName, $lastName, $birthDate, $description, $email, $nickname, $pass) {
     $db = GetConnexion();
-    $req = $db->prepare('INSERT INTO users(prenom,nom,dateNaissance,description,email,pseudo,motPass) VALUES(:FirstName, :LastName, :BirthDate, :Description, :Email,:Nickname, :Password)');
-    $req->bindParam(':FirstName', $_POST['FirstName'], PDO::PARAM_STR);
-    $req->bindParam(':LastName', $_POST['LastName'], PDO::PARAM_STR);
-    $req->bindParam(':BirthDate', $_POST['BirthDate'], PDO::PARAM_STR);
-    $req->bindParam(':Description', $_POST['Description'], PDO::PARAM_STR);
-    $req->bindParam(':Email', $_POST['Email'], PDO::PARAM_STR);
-    $req->bindParam(':Nickname', $_POST['Nickname'], PDO::PARAM_STR);
-    $req->bindParam(':Password', $_POST['Password'], PDO::PARAM_STR);
+    $req = $db->prepare('INSERT INTO '.TABLENAME.'('.FIRSTNAME.','.LASTNAME.','.BIRTHDATE.','.DESCRIPTION.','.EMAIL.','.USERNAME.','.PASSWORD.') VALUES(:FirstName, :LastName, :BirthDate, :Description, :Email,:Nickname, :Password)');
+    $req->bindParam(':FirstName', $fstName, PDO::PARAM_STR);
+    $req->bindParam(':LastName', $lastName, PDO::PARAM_STR);
+    $req->bindParam(':BirthDate', $birthDate, PDO::PARAM_STR);
+    $req->bindParam(':Description', $description, PDO::PARAM_STR);
+    $req->bindParam(':Email', $email, PDO::PARAM_STR);
+    $req->bindParam(':Nickname', $nickname, PDO::PARAM_STR);
+    $req->bindParam(':Password', $pass, PDO::PARAM_STR);
     $retour = $req->execute();
 }
 
 function SelectUsers() {
     $db = GetConnexion();
-    $req = $db->prepare("SELECT idUser,prenom,nom from users");
+    $req = $db->prepare('SELECT '.IDUSER.','.FIRSTNAME.','.LASTNAME.' FROM '.TABLENAME);
     $req->execute();
     $requestResponse = $req->fetchAll();
     return $requestResponse;
 }
+
 function SelectUser($id) {
     echo $id;
     $db = GetConnexion();
-    $req = $db->prepare("SELECT * FROM users WHERE idUser='".$id."'");
+    $req = $db->prepare("SELECT * FROM ".TABLENAME." WHERE ".IDUSER."='" . $id . "'");
     $req->execute();
     $requestResponse = $req->fetch();
     return $requestResponse;
@@ -51,18 +68,33 @@ function SelectUser($id) {
 
 function AssocToHtml($listUsers) {
     foreach ($listUsers as $val) {
-        echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id='.$val['idUser'].'"> <= voir les details</a></td></tr>';
+        echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id=' . $val['idUser'] . '"> <= voir les details</a></td></tr>';
     }
 }
-function DetailsToHtml($UserInfo){
-        echo '<tr><td>' . $UserInfo['prenom'] . ' </td><td> ' . $UserInfo['nom'] . '</td><td>' . $UserInfo['dateNaissance'] . '</td><td>' . $UserInfo['pseudo'] . '</td><td>' . $UserInfo['email'] . '</td><td>' . $UserInfo['description'] . '</td></td></tr>';
-    
+
+function DetailsToHtml($UserInfo) {
+    echo '<tr><td>' . $UserInfo['prenom'] . ' </td><td> ' . $UserInfo['nom'] . '</td><td>' . $UserInfo['dateNaissance'] . '</td><td>' . $UserInfo['pseudo'] . '</td><td>' . $UserInfo['email'] . '</td><td>' . $UserInfo['description'] . '</td></td></tr>';
 }
-function deleteUser($id)
-{
+
+function deleteUser($id) {
     $id = $_REQUEST['idUser'];
     $db = GetConnexion();
-    $req = $db->prepare("DELETE FROM users WHERE idUser = '$id'");
+    $req = $db->prepare("DELETE FROM ".TABLENAME." WHERE ".IDUSER."= '$id'");
     $req->execute();
-    header('Location: ./Users.php');
+}
+
+function login($username, $pass) {
+    $db = GetConnexion();
+    $req = $db->prepare('SELECT '.IDUSER.','.USERNAME.','.PASSWORD.' FROM '.TABLENAME.' WHERE '.FIRSTNAME.'=:user AND '.PASSWORD.'=:password');
+    $req->bindParam(':user', $username, PDO::PARAM_STR);
+    $req->bindParam(':password', $pass, PDO::PARAM_STR);
+    $req->execute();
+    $result = $req->fetch(PDO::FETCH_ASSOC);
+    if ($result === false) {
+        return false;
+    } else {
+
+        $_SESSION['userlogged'] = $result['idUser'];
+        return true;
+    }
 }
