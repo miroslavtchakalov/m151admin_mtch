@@ -34,7 +34,7 @@
     </head>
     <body>
         <div id="Container">
-            <form action=form.php method="POST">
+            <form action=Connexion.php method="POST">
                 
                 <label class="divItem" for="FN">Prenom : </label><input type="text" placeholder="Prenom" name="nickname" class="item" id="FN">
                 <label class="divItem" for="pass">Mot de passe : </label><input type="password" name="pass" class="item" id="pass">

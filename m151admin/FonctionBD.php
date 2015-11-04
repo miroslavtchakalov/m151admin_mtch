@@ -98,3 +98,7 @@ function login($username, $pass) {
         return true;
     }
 }
+function admin($id)
+{
+    
+}
