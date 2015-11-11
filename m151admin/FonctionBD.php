@@ -93,8 +93,7 @@ function login($username, $pass) {
     if ($result === false) {
         return false;
     } else {
-		//TODO ne pas accéder à $_SESSION ici, mais retourner l'idUser et le mettre dans la session depuis l'appel du login
-        $_SESSION['userlogged'] = $result['idUser'];
+		
         return true;
     }
 }

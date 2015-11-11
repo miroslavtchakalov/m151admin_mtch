@@ -15,11 +15,12 @@
      $loginResult = login($_POST['nickname'],$_POST['pass']);
      
      if ($loginResult) {
-        header('Location:./pageUtilisateur.php');
+        header('Location:./Connexion.php');
      }
      else
      {
-        header('Location:./Connexion.php'); 
+        
+        header('Location:./PageUtilisateur.php'); 
      }
     }
  
