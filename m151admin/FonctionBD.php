@@ -65,7 +65,7 @@ function SelectUser($id) {
     $requestResponse = $req->fetch();
     return $requestResponse;
 }
-
+//TODO sortir les fonctions TOHTML dans un fichier à part, ici on garde uniquement ce qui concerne l'accès à la BD
 function AssocToHtml($listUsers) {
     foreach ($listUsers as $val) {
         echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id=' . $val['idUser'] . '"> <= voir les details</a></td></tr>';
@@ -93,7 +93,7 @@ function login($username, $pass) {
     if ($result === false) {
         return false;
     } else {
-
+		//TODO ne pas accéder à $_SESSION ici, mais retourner l'idUser et le mettre dans la session depuis l'appel du login
         $_SESSION['userlogged'] = $result['idUser'];
         return true;
     }
