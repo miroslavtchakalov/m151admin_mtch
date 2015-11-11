@@ -1,4 +1,7 @@
 <?php
+
+include './FonctionBD.php';
+
 function AssocToHtml($listUsers) {
     foreach ($listUsers as $val) {
         echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id=' . $val['idUser'] . '"> <= voir les details</a></td></tr>';

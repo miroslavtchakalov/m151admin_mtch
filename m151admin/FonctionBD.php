@@ -1,5 +1,6 @@
 
 <?php
+include './FonctionsToHTML.php';
 
 //Informations relatives à la BD
 define("HOST", "127.0.0.1");
@@ -65,16 +66,6 @@ function SelectUser($id) {
     $requestResponse = $req->fetch();
     return $requestResponse;
 }
-//TODO sortir les fonctions TOHTML dans un fichier à part, ici on garde uniquement ce qui concerne l'accès à la BD
-function AssocToHtml($listUsers) {
-    foreach ($listUsers as $val) {
-        echo '<tr><td>' . $val['prenom'] . ' </td><td> ' . $val['nom'] . '</td><td> <a href="Userdetail.php?id=' . $val['idUser'] . '"> <= voir les details</a></td></tr>';
-    }
-}
-
-function DetailsToHtml($UserInfo) {
-    echo '<tr><td>' . $UserInfo['prenom'] . ' </td><td> ' . $UserInfo['nom'] . '</td><td>' . $UserInfo['dateNaissance'] . '</td><td>' . $UserInfo['pseudo'] . '</td><td>' . $UserInfo['email'] . '</td><td>' . $UserInfo['description'] . '</td></td></tr>';
-}
 
 function deleteUser($id) {
     $id = $_REQUEST['idUser'];
@@ -94,10 +85,6 @@ function login($username, $pass) {
         return false;
     } else {
 		
-        return true;
+        return $result['idUser'];
     }
-}
-function admin($id)
-{
-    
 }

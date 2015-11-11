@@ -1,31 +1,22 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
-
-<!DOCTYPE html>
-<?php
  include './FonctionBD.php';
  if (isset($_POST["Validate"])) 
     {
      $loginResult = login($_POST['nickname'],$_POST['pass']);
      
-     if ($loginResult) {
+     if (!$loginResult) {
         header('Location:./Connexion.php');
      }
      else
      {
-        
+        $_SESSION['userLogged'] = $loginResult;
         header('Location:./PageUtilisateur.php'); 
      }
     }
  
     
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <title>form</title>
