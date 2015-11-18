@@ -1,6 +1,5 @@
 
 <?php
-include './FonctionsToHTML.php';
 
 //Informations relatives à la BD
 define("HOST", "127.0.0.1");
@@ -36,7 +35,6 @@ function GetConnexion() {
 
     return $dbh;
 }
-
 function Insertion($fstName, $lastName, $birthDate, $description, $email, $nickname, $pass) {
     $db = GetConnexion();
     $req = $db->prepare('INSERT INTO '.TABLENAME.'('.FIRSTNAME.','.LASTNAME.','.BIRTHDATE.','.DESCRIPTION.','.EMAIL.','.USERNAME.','.PASSWORD.') VALUES(:FirstName, :LastName, :BirthDate, :Description, :Email,:Nickname, :Password)');
@@ -49,6 +47,7 @@ function Insertion($fstName, $lastName, $birthDate, $description, $email, $nickn
     $req->bindParam(':Password', $pass, PDO::PARAM_STR);
     $retour = $req->execute();
 }
+
 
 function SelectUsers() {
     $db = GetConnexion();
@@ -76,7 +75,7 @@ function deleteUser($id) {
 
 function login($username, $pass) {
     $db = GetConnexion();
-    $req = $db->prepare('SELECT '.IDUSER.','.USERNAME.','.PASSWORD.' FROM '.TABLENAME.' WHERE '.FIRSTNAME.'=:user AND '.PASSWORD.'=:password');
+    $req = $db->prepare('SELECT '.IDUSER.','.USERNAME.','.PASSWORD.' FROM '.TABLENAME.' WHERE '.USERNAME.'=:user AND '.PASSWORD.'=:password');
     $req->bindParam(':user', $username, PDO::PARAM_STR);
     $req->bindParam(':password', $pass, PDO::PARAM_STR);
     $req->execute();
@@ -85,6 +84,6 @@ function login($username, $pass) {
         return false;
     } else {
 		
-        return $result['idUser'];
+        return $result['pseudo'];
     }
 }

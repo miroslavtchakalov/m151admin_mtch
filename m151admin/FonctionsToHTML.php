@@ -1,6 +1,5 @@
 <?php
 
-include './FonctionBD.php';
 
 function AssocToHtml($listUsers) {
     foreach ($listUsers as $val) {
